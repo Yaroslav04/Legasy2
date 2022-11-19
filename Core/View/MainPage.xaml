@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Legasy2.Core.View.MainPage"
+             Title="Кримінальні провадження"
+             xmlns:model="clr-namespace:Legasy2.Core.Model"
+             xmlns:viewmodel="clr-namespace:Legasy2.Core.ViewModel"
+             x:DataType="viewmodel:MainViewModel">
+
+    <Grid Margin="0,10,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Frame Grid.Column="0" HasShadow="True" CornerRadius="15" Margin="2" Padding="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ScrollView VerticalOptions="FillAndExpand" Grid.Row="0">
+                    <StackLayout>
+                        <Entry Margin="3,3,3,3" Placeholder="Пошук"
+                       Text="{Binding SearchText}"></Entry>
+                        <Picker Margin="3,3,3,3" Title="Стаття"
+                        ItemsSource="{Binding QualificationsList}" SelectedItem="{Binding SelectedQualification}"></Picker>
+                    </StackLayout>
+                </ScrollView>
+                <StackLayout VerticalOptions="End" Grid.Row="1">
+                    <StackLayout HorizontalOptions="Fill">
+                        <Button Text="Пошук" CornerRadius="15" Margin="3,3,3,3" 
+                        Command="{Binding SearchCommand}"/>
+                        <Button Text="Очистити пошук" CornerRadius="15" Margin="3,3,3,3" 
+                        Command="{Binding ClearCommand}"/>
+                        <Button Text="Редагувати" CornerRadius="15" Margin="3,3,3,3" 
+                        Command="{Binding EditCommand}"/>
+                        <Button Text="Видалити" CornerRadius="15" Margin="3,3,3,3" 
+                        Command="{Binding DeleteCommand}"/>
+                    </StackLayout>
+                </StackLayout>
+            </Grid>
+        </Frame>
+        <Frame Grid.Column="1" HasShadow="True"  CornerRadius="15" Margin="2" Padding="20">
+            <RefreshView  Padding="2,2,2,2" Margin="2,2,2,2" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+                <CollectionView  x:Name="ItemsListView" 
+                ItemsSource="{Binding Items}"
+                SelectedItem="{Binding SelectedItem}"
+                SelectionMode="Single">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <ContentView>
+                                <Frame BorderColor="#487D89" BackgroundColor="White" HasShadow="True" CornerRadius="15" Margin="2">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Column="0"  x:DataType="model:CaseClass">
+                                            <HorizontalStackLayout HorizontalOptions="StartAndExpand" Spacing="10">
+                                                <Label Text="📇"  LineBreakMode="NoWrap"></Label>
+                                                <Label TextColor="Black" Text="{Binding CriminalNumber}"  LineBreakMode="NoWrap"></Label>
+                                                <Label  TextColor="Black" Text="{Binding Qualification}"  LineBreakMode="NoWrap"></Label>
+                                                <Label  TextColor="Black" FontAttributes="Bold" Text="{Binding Header}"  LineBreakMode="NoWrap"></Label>
+                                            </HorizontalStackLayout>
+                                        </StackLayout>
+                                    </Grid>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                NumberOfTapsRequired="2"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=ItemTappedDouble}"		
+                                CommandParameter="{Binding .}">
+                                        </TapGestureRecognizer>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState Name="Normal" />
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#487D89" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                            </ContentView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+        </Frame>
+    </Grid>
+</ContentPage>
