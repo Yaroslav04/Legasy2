@@ -49,14 +49,13 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <ContentView>
-                                <Frame BorderColor="#487D89" BackgroundColor="White" HasShadow="True" CornerRadius="15" Margin="2">
+                                <Frame BorderColor="{StaticResource Primary}" BackgroundColor="White" HasShadow="True" CornerRadius="15" Margin="2">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"></ColumnDefinition>
                                         </Grid.ColumnDefinitions>
                                         <StackLayout Grid.Column="0"  x:DataType="model:CaseClass">
                                             <HorizontalStackLayout HorizontalOptions="StartAndExpand" Spacing="10">
-                                                <Label Text="📇"  LineBreakMode="NoWrap"></Label>
                                                 <Label TextColor="Black" Text="{Binding CriminalNumber}"  LineBreakMode="NoWrap"></Label>
                                                 <Label  TextColor="Black" Text="{Binding Qualification}"  LineBreakMode="NoWrap"></Label>
                                                 <Label  TextColor="Black" FontAttributes="Bold" Text="{Binding Header}"  LineBreakMode="NoWrap"></Label>

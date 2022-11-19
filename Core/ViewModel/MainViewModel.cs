@@ -117,6 +117,8 @@ namespace Legasy2.Core.ViewModel
                                     FileManager.CreateNewDirectory(cs.CriminalNumber);
                                     FileManager.OpenFolder(cs.CriminalNumber);
                                     UpdateQualification();
+                                    Clear();
+                                    return;
                                 }
                                 catch
                                 {
