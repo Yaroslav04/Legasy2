@@ -50,18 +50,13 @@
                         <DataTemplate>
                             <ContentView>
                                 <Frame BorderColor="{StaticResource Primary}" BackgroundColor="White" HasShadow="True" CornerRadius="15" Margin="2">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*"></ColumnDefinition>
-                                        </Grid.ColumnDefinitions>
-                                        <StackLayout Grid.Column="0"  x:DataType="model:CaseClass">
-                                            <HorizontalStackLayout HorizontalOptions="StartAndExpand" Spacing="10">
-                                                <Label TextColor="Black" Text="{Binding CriminalNumber}"  LineBreakMode="NoWrap"></Label>
-                                                <Label  TextColor="Black" Text="{Binding Qualification}"  LineBreakMode="NoWrap"></Label>
-                                                <Label  TextColor="Black" FontAttributes="Bold" Text="{Binding Header}"  LineBreakMode="NoWrap"></Label>
-                                            </HorizontalStackLayout>
-                                        </StackLayout>
-                                    </Grid>
+                                    <StackLayout WidthRequest="1000" x:DataType="model:CaseClass">
+                                        <HorizontalStackLayout HorizontalOptions="StartAndExpand" Spacing="10">
+                                            <Label TextColor="Black" Text="{Binding CriminalNumber}"  LineBreakMode="NoWrap"></Label>
+                                            <Label  TextColor="Black" Text="{Binding Qualification}"  LineBreakMode="NoWrap"></Label>
+                                            <Label  TextColor="Black" FontAttributes="Bold" Text="{Binding Header}"  LineBreakMode="NoWrap"></Label>
+                                        </HorizontalStackLayout>
+                                    </StackLayout>
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer 
                                 NumberOfTapsRequired="2"
