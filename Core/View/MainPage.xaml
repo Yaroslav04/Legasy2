@@ -50,31 +50,41 @@
                         <DataTemplate>
                             <ContentView>
                                 <Frame BorderColor="{StaticResource Primary}" BackgroundColor="White" HasShadow="True" CornerRadius="15" Margin="2">
-                                    <StackLayout WidthRequest="1000" x:DataType="model:CaseClass">
-                                        <HorizontalStackLayout HorizontalOptions="StartAndExpand" Spacing="10">
-                                            <Label TextColor="Black" Text="{Binding CriminalNumber}"  LineBreakMode="NoWrap"></Label>
-                                            <Label  TextColor="Black" Text="{Binding Qualification}"  LineBreakMode="NoWrap"></Label>
-                                            <Label  TextColor="Black" FontAttributes="Bold" Text="{Binding Header}"  LineBreakMode="NoWrap"></Label>
-                                        </HorizontalStackLayout>
-                                    </StackLayout>
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                NumberOfTapsRequired="2"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=ItemTappedDouble}"		
-                                CommandParameter="{Binding .}">
-                                        </TapGestureRecognizer>
-                                    </Frame.GestureRecognizers>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <StackLayout Grid.Column="0" x:DataType="model:CaseClass">
+                                            <HorizontalStackLayout HorizontalOptions="StartAndExpand" Spacing="10">
+                                                <Label TextColor="Black" Text="{Binding CriminalNumber}"  LineBreakMode="NoWrap"></Label>
+                                                <Label  TextColor="Black" Text="{Binding Qualification}"  LineBreakMode="NoWrap"></Label>
+                                                <Label  TextColor="Black" FontAttributes="Bold" Text="{Binding Header}"  LineBreakMode="NoWrap"></Label>
+                                            </HorizontalStackLayout>
+                                        </StackLayout>
+                                    </Grid>
                                 </Frame>
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup Name="CommonStates">
                                         <VisualState Name="Normal" />
                                         <VisualState Name="Selected">
                                             <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="#487D89" />
+                                                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>
                                 </VisualStateManager.VisualStateGroups>
+                                <ContentView.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=ItemTappedSingle}"		
+                                CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                    <TapGestureRecognizer 
+                                NumberOfTapsRequired="2"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:MainViewModel}}, Path=ItemTappedDouble}"		
+                                CommandParameter="{Binding .}">
+                                    </TapGestureRecognizer>
+                                </ContentView.GestureRecognizers>
                             </ContentView>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

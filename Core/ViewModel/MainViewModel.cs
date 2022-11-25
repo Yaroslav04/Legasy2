@@ -16,6 +16,7 @@ namespace Legasy2.Core.ViewModel
         public MainViewModel()
         {
             ItemTappedDouble = new Command<CaseClass>(OnDoubleItemTapped);
+            ItemTappedSingle = new Command<CaseClass>(OnSingleItemTapped);
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             SearchCommand = new Command(Search);
             ClearCommand = new Command(Clear);
@@ -25,6 +26,7 @@ namespace Legasy2.Core.ViewModel
             QualificationsList = new ObservableCollection<string>();
 
         }
+
         public void OnAppearing()
         {
             UpdateQualification();
@@ -80,6 +82,7 @@ namespace Legasy2.Core.ViewModel
         }
 
         public Command<CaseClass> ItemTappedDouble { get; }
+        public Command<CaseClass> ItemTappedSingle { get; }
         public Command LoadItemsCommand { get; }
         public Command SearchCommand { get; }
         public Command ClearCommand { get; }
@@ -88,11 +91,17 @@ namespace Legasy2.Core.ViewModel
 
         private void OnDoubleItemTapped(CaseClass item)
         {
+            Debug.WriteLine("double tapped");
             if (item == null)
             {
                 return;
             }
             FileManager.OpenFolder(item.CriminalNumber);
+        }
+
+        private void OnSingleItemTapped(CaseClass obj)
+        {
+            Debug.WriteLine("single tapped");
         }
 
         async Task ExecuteLoadItemsCommand()
@@ -160,6 +169,7 @@ namespace Legasy2.Core.ViewModel
 
                     if (c.Count > 0)
                     {
+                        c = c.OrderBy(x => x.Header).ToList();
                         foreach (var item in c)
                         {
                             Items.Add(item);
