@@ -41,8 +41,9 @@ namespace Legasy2.Core.Service.DataBase
                     qualificationsInt.Add(Convert.ToInt32(item.Qualification));
                 }
 
-                qualifications = qualifications.Distinct().ToList();
-                qualifications = qualifications.OrderBy(x => x).ToList();
+                qualificationsInt = qualificationsInt.Distinct().ToList();
+                qualificationsInt = qualificationsInt.OrderBy(x => x).ToList();
+
                 foreach (var item in qualificationsInt)
                 {
                     qualifications.Add(item.ToString());
