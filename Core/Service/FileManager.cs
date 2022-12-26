@@ -21,6 +21,11 @@ namespace Legasy2.Core.Service
                 return @"D:\DataBase\CriminalCases\";
             }
 
+            if (Directory.Exists(@"C:\DataBase\CriminalCases\"))
+            {
+                return @"C:\DataBase\CriminalCases\";
+            }
+
             throw new Exception("Folder not exist");
         }
 
