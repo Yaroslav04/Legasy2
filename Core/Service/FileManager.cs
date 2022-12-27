@@ -11,19 +11,19 @@ namespace Legasy2.Core.Service
     {
         public static string GetPath()
         {
-            if (Directory.Exists(@"Q:\DataBase\CriminalCases\"))
+            if (Directory.Exists(@"Q:\CriminalCases\"))
             {
-                return @"Q:\DataBase\CriminalCases\";
+                return @"Q:\CriminalCases\";
             }
 
-            if (Directory.Exists(@"D:\DataBase\CriminalCases\"))
+            if (Directory.Exists(@"C:\CriminalCases\"))
             {
-                return @"D:\DataBase\CriminalCases\";
+                return @"C:\CriminalCases\";
             }
 
-            if (Directory.Exists(@"C:\DataBase\CriminalCases\"))
+            if (Directory.Exists(@"D:\CriminalCases\"))
             {
-                return @"C:\DataBase\CriminalCases\";
+                return @"D:\CriminalCases\";
             }
 
             throw new Exception("Folder not exist");

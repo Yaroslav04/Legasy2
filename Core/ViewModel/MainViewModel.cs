@@ -25,6 +25,23 @@ namespace Legasy2.Core.ViewModel
             Items = new ObservableCollection<CaseClass>();
             QualificationsList = new ObservableCollection<string>();
 
+            Run();
+
+               
+        }
+
+        public async void Run()
+        {
+            await Task.Delay(5000);
+            foreach (var item in Migrate2.LoadData())
+            {
+                CaseClass caseClass = new CaseClass();
+                caseClass.CriminalNumber = item.Name;
+                caseClass.Qualification = item.Decsription.Qualification;
+                caseClass.Header = item.Decsription.Header;
+                await App.DataBase.Case.SaveAsync(caseClass);
+                Debug.WriteLine(item.Name);
+            }
         }
 
         public void OnAppearing()
